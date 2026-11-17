@@ -1,0 +1,840 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neusser Tafel e.V. – Regional sozial.</title>
+<meta name="description" content="Die Neusser Tafel versorgt seit 1996 rund 1.000 Haushalte pro Woche in Neuss und Korschenbroich mit Lebensmitteln. Öffnungszeiten, Anmeldung, Spenden und Ehrenamt.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<style>
+  /* Schrift lokal eingebunden – keine Verbindung zu Google Fonts */
+  @font-face {
+    font-family: "Schibsted Grotesk";
+    src: url("assets/fonts/schibsted-grotesk-latin-wght-normal.woff2") format("woff2");
+    font-weight: 400 900; font-style: normal; font-display: swap;
+  }
+  :root {
+    --yellow: #F2E21E;      /* aus dem Logo */
+    --yellow-soft: #FBF5B8;
+    --ink: #15140F;         /* Logo-Schwarz, minimal wärmer */
+    --ink-2: #3D3B33;
+    --muted: #6E6A5E;
+    --paper: #FAF8F1;
+    --paper-2: #F1EEE2;
+    --line: #DEDACB;
+    --open: #1F7A3A;
+    --radius: 14px;
+    --max: 1240px;
+    --gutter: clamp(16px, 4vw, 40px);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: "Schibsted Grotesk", system-ui, sans-serif;
+    font-size: 17px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+  h1, h2, h3 { line-height: 1.02; letter-spacing: -0.025em; margin: 0; font-weight: 800; }
+  h2 { font-size: clamp(36px, 5.4vw, 68px); }
+  h3 { font-size: 22px; letter-spacing: -0.01em; line-height: 1.2; font-weight: 700; }
+  p { margin: 0 0 1em; }
+  .eyebrow {
+    font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em;
+    display: inline-flex; align-items: center; gap: 10px; margin-bottom: 20px;
+  }
+  .eyebrow::before { content: ""; width: 22px; height: 3px; background: currentColor; }
+  .lead { font-size: clamp(19px, 1.7vw, 22px); line-height: 1.45; color: var(--ink-2); max-width: 40ch; }
+
+  /* ---------- Header ---------- */
+  .top {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .top .wrap { display: flex; align-items: center; gap: 24px; height: 72px; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 800; letter-spacing: -0.01em; font-size: 18px; white-space: nowrap; }
+  .brand img { width: 44px; height: 44px; border-radius: 50%; }
+  .brand small { font-weight: 500; color: var(--muted); font-size: 14px; margin-left: 2px; }
+  .nav { display: flex; gap: 4px; margin-left: auto; }
+  .nav a { text-decoration: none; font-weight: 500; font-size: 15.5px; padding: 8px 12px; border-radius: 8px; }
+  .nav a:hover { background: var(--paper-2); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px; text-decoration: none; cursor: pointer;
+    font: inherit; font-weight: 700; font-size: 16px; border: 0;
+    padding: 13px 20px; border-radius: 999px; transition: transform .15s ease, background .15s ease;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-ink { background: var(--ink); color: var(--paper); }
+  .btn-ink:hover { background: #000; }
+  .btn-yellow { background: var(--yellow); color: var(--ink); }
+  .btn-yellow:hover { background: #E8D60F; }
+  .btn-line { background: transparent; color: inherit; box-shadow: inset 0 0 0 2px currentColor; }
+  .btn svg { width: 18px; height: 18px; }
+  .menu-btn { display: none; margin-left: auto; background: none; border: 0; padding: 8px; cursor: pointer; }
+  .menu-btn svg { width: 28px; height: 28px; }
+  @media (max-width: 980px) {
+    .nav, .top .btn-ink { display: none; }
+    .menu-btn { display: block; }
+    .top.open .nav {
+      display: flex; flex-direction: column; position: absolute; left: 0; right: 0; top: 72px;
+      background: var(--paper); border-bottom: 1px solid var(--line); padding: 8px var(--gutter) 20px; gap: 0;
+    }
+    .top.open .nav a { padding: 14px 0; font-size: 20px; font-weight: 600; border-bottom: 1px solid var(--line); border-radius: 0; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: clamp(40px, 7vw, 96px) 0 clamp(48px, 6vw, 80px); }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: end; }
+  .hero h1 { font-size: clamp(52px, 9vw, 128px); line-height: .92; letter-spacing: -0.045em; font-weight: 900; }
+  .hero h1 .mark { position: relative; white-space: nowrap; z-index: 0; }
+  .hero h1 .mark::after {
+    content: ""; position: absolute; left: -0.04em; right: -0.06em; bottom: 0.06em; height: 0.36em;
+    background: var(--yellow); z-index: -1; transform: skewX(-8deg);
+  }
+  .hero-grid > *, .contact > *, .about > *, .places > *, .paths > * { min-width: 0; }
+  .hero .lead { margin-top: 28px; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+  .status {
+    background: var(--ink); color: var(--paper); border-radius: 20px; padding: 26px 26px 22px;
+  }
+  .status-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 18px; }
+  .status-head strong { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--yellow); }
+  .status-head strong { white-space: nowrap; }
+  .status-head span { color: #B9B5A6; font-size: 15px; text-align: right; }
+  .status ul { list-style: none; margin: 0; padding: 0; }
+  .status li { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; padding: 14px 0; border-top: 1px solid #2E2C24; }
+  .status li .name { font-weight: 600; }
+  .status li .where { color: #9B978A; font-size: 14px; grid-column: 1; }
+  .status li .state { grid-row: 1 / span 2; grid-column: 2; align-self: center; text-align: right; font-size: 15px; }
+  .pill { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; white-space: nowrap; }
+  .pill::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: #6E6A5E; }
+  .pill.is-open { color: var(--yellow); }
+  .pill.is-open::before { background: var(--yellow); box-shadow: 0 0 0 4px rgba(242,226,30,.18); }
+  .pill.is-later::before { background: transparent; box-shadow: inset 0 0 0 2px #B9B5A6; }
+  .state .pill { flex-wrap: wrap; justify-content: flex-end; column-gap: 8px; row-gap: 0; }
+  .pill small { flex-basis: 100%; text-align: right; font-weight: 400; color: #9B978A; font-size: 13px; }
+  .status-foot { margin-top: 14px; font-size: 14px; color: #B9B5A6; }
+  .status-foot a { color: var(--paper); }
+
+  .hero-media { margin-top: clamp(40px, 6vw, 72px); display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+  .ph {
+    position: relative; border-radius: var(--radius); overflow: hidden; min-height: 220px;
+    background:
+      repeating-linear-gradient(135deg, transparent 0 14px, rgba(21,20,15,.045) 14px 15px),
+      var(--paper-2);
+    border: 1px solid var(--line);
+    display: flex; align-items: flex-end;
+  }
+  .ph span {
+    margin: 14px; font-size: 13px; font-weight: 600; color: var(--muted);
+    background: var(--paper); padding: 6px 10px; border-radius: 6px; border: 1px solid var(--line);
+  }
+  .ph.tall { aspect-ratio: 16 / 9; min-height: 0; }
+  .ph.yellow { background: repeating-linear-gradient(135deg, transparent 0 14px, rgba(21,20,15,.07) 14px 15px), var(--yellow); border-color: transparent; }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-media { grid-template-columns: 1fr; }
+    .hero-media .ph:last-child { display: none; }
+  }
+
+  /* ---------- Zahlen ---------- */
+  .facts { background: var(--yellow); }
+  .facts .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .fact { padding: 40px 24px 36px 0; }
+  .fact + .fact { padding-left: 24px; border-left: 2px solid var(--ink); }
+  .fact b { display: block; white-space: nowrap; font-size: clamp(32px, 4.4vw, 60px); font-weight: 900; letter-spacing: -0.04em; line-height: 1; }
+  .fact span { display: block; margin-top: 10px; font-weight: 500; max-width: 22ch; }
+  @media (max-width: 860px) {
+    .facts .wrap { grid-template-columns: 1fr 1fr; }
+    .fact, .fact + .fact { padding: 28px 16px 24px 0; border-left: 0; }
+    .fact:nth-child(even) { padding-left: 16px; border-left: 2px solid var(--ink); }
+    .fact:nth-child(n+3) { border-top: 2px solid var(--ink); }
+  }
+
+  /* ---------- Sections ---------- */
+  section { padding: clamp(72px, 10vw, 128px) 0; }
+  .sec-head { display: grid; grid-template-columns: 1fr 1fr; gap: 32px 64px; align-items: end; margin-bottom: clamp(40px, 5vw, 64px); }
+  .sec-head p { color: var(--ink-2); font-size: 19px; max-width: 46ch; margin: 0; }
+  @media (max-width: 860px) { .sec-head { grid-template-columns: 1fr; } }
+
+  /* Zwei Wege */
+  .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .path { border-radius: 20px; padding: clamp(28px, 4vw, 48px); display: flex; flex-direction: column; min-height: 420px; }
+  .path.need { background: var(--ink); color: var(--paper); }
+  .path.give { background: var(--paper-2); }
+  .path h3 { font-size: clamp(30px, 3.4vw, 44px); letter-spacing: -0.03em; line-height: 1.02; font-weight: 800; margin-bottom: 20px; }
+  .path ol { margin: 0 0 28px; padding: 0; list-style: none; counter-reset: s; }
+  .path ol li { counter-increment: s; display: grid; grid-template-columns: 36px 1fr; padding: 12px 0; border-top: 1px solid rgba(127,127,127,.25); }
+  .path ol li::before { content: counter(s, decimal-leading-zero); font-weight: 700; color: var(--muted); }
+  .path.need ol li::before { color: var(--yellow); }
+  .path .btn { margin-top: auto; align-self: flex-start; }
+  @media (max-width: 860px) { .paths { grid-template-columns: 1fr; } .path { min-height: 0; } }
+
+  /* Öffnungszeiten */
+  #zeiten { background: var(--paper-2); }
+  .week { width: 100%; border-collapse: collapse; background: var(--paper); border-radius: var(--radius); overflow: hidden; }
+  .week th, .week td { padding: 16px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+  .week thead th { font-size: 13px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 700; background: var(--paper); }
+  .week thead th.today { color: var(--ink); }
+  .week thead th.today::after { content: " · heute"; text-transform: none; letter-spacing: 0; color: var(--ink); background: var(--yellow); padding: 1px 6px; border-radius: 4px; margin-left: 4px; }
+  .week tbody th { font-weight: 700; width: 24%; }
+  .week tbody th small { display: block; font-weight: 400; color: var(--muted); font-size: 14px; margin-top: 2px; }
+  .week td { font-variant-numeric: tabular-nums; font-size: 15px; white-space: nowrap; color: var(--muted); }
+  .week td.on { color: var(--ink); font-weight: 600; }
+  .week td.on span { background: var(--yellow-soft); padding: 3px 8px; border-radius: 6px; }
+  .week td.col-today { background: rgba(242,226,30,.09); }
+  .week tbody tr:last-child > * { border-bottom: 0; }
+  .table-scroll { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--line); }
+  .days { display: none; list-style: none; margin: 0; padding: 0; gap: 10px; }
+  .day { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 18px 8px; }
+  .day.today { border: 2px solid var(--ink); }
+  .day h3 { font-size: 18px; margin-bottom: 6px; display: flex; gap: 8px; align-items: center; }
+  .day h3 em { font-style: normal; font-size: 12px; background: var(--yellow); padding: 2px 7px; border-radius: 4px; }
+  .day dl { margin: 0; }
+  .day div { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-top: 1px solid var(--line); font-size: 15.5px; }
+  .day dt small { display: block; color: var(--muted); font-size: 13px; }
+  .day dd { margin: 0; font-weight: 700; white-space: nowrap; }
+  @media (max-width: 700px) { .table-scroll { display: none; } .days { display: grid; } }
+  .notes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+  .note { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; font-size: 15.5px; }
+  .note h3 { font-size: 17px; margin-bottom: 8px; }
+  .note p { margin: 0; color: var(--ink-2); }
+  .note.warn { background: var(--yellow); border-color: var(--yellow); }
+  @media (max-width: 860px) { .notes { grid-template-columns: 1fr; } }
+
+  /* Angebote */
+  .offers { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+  .offer { grid-column: span 4; border-top: 3px solid var(--ink); padding-top: 22px; }
+  .offer .ph { aspect-ratio: 4 / 3; min-height: 0; margin-bottom: 22px; }
+  .offer h3 { margin-bottom: 10px; }
+  .offer p { color: var(--ink-2); font-size: 16px; }
+  .offer .meta { font-size: 14.5px; font-weight: 600; color: var(--ink); margin: 0; }
+  .offer .meta span { color: var(--muted); font-weight: 400; }
+  .offer.wide { grid-column: span 6; }
+  @media (max-width: 960px) { .offer, .offer.wide { grid-column: span 6; } }
+  @media (max-width: 620px) { .offer, .offer.wide { grid-column: span 12; } }
+
+  /* Über uns */
+  .about { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 6vw, 96px); }
+  .about .ph { aspect-ratio: 4 / 5; min-height: 0; position: sticky; top: 100px; }
+  .about-body h2 { margin-bottom: 32px; }
+  .about-body .big { font-size: clamp(22px, 2.2vw, 28px); line-height: 1.35; letter-spacing: -0.01em; font-weight: 500; }
+  .about-body .big em { font-style: normal; background: linear-gradient(transparent 62%, var(--yellow) 62%); }
+  .timeline { list-style: none; padding: 0; margin: 40px 0 0; border-top: 1px solid var(--line); }
+  .timeline li { display: grid; grid-template-columns: 140px 1fr; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .timeline b { font-weight: 800; }
+  .timeline span { color: var(--ink-2); }
+  @media (max-width: 860px) {
+    .about { grid-template-columns: 1fr; }
+    .about .ph { position: static; aspect-ratio: 16 / 10; }
+    .timeline li { grid-template-columns: 1fr; gap: 2px; }
+  }
+
+  /* Helfen */
+  #helfen { background: var(--ink); color: var(--paper); }
+  #helfen .sec-head p { color: #C9C5B6; }
+  .ways { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #34322A; border: 1px solid #34322A; border-radius: 20px; overflow: hidden; }
+  .way { background: var(--ink); padding: 32px 26px 30px; display: flex; flex-direction: column; gap: 12px; }
+  .way .num { font-size: 13px; font-weight: 700; color: var(--yellow); letter-spacing: .1em; }
+  .way h3 { font-size: 24px; }
+  .way p { color: #C9C5B6; font-size: 15.5px; margin: 0; }
+  .way a { margin-top: auto; padding-top: 12px; font-weight: 700; text-decoration: none; color: var(--yellow); }
+  .way a:hover { text-decoration: underline; }
+  @media (max-width: 960px) { .ways { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .ways { grid-template-columns: 1fr; } }
+
+  .bank {
+    margin-top: 16px; background: var(--yellow); color: var(--ink); border-radius: 20px;
+    padding: clamp(24px, 3.5vw, 40px); display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
+  }
+  .bank dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 24px; margin: 12px 0 0; font-size: 16px; }
+  .bank dt { color: var(--ink-2); }
+  .bank dd { margin: 0; font-weight: 700; }
+  .bank .iban { font-size: clamp(22px, 3vw, 34px); font-weight: 800; letter-spacing: 0.01em; margin-top: 4px; word-spacing: .15em; }
+  .bank small { display: block; margin-top: 16px; font-size: 14px; color: var(--ink-2); }
+  @media (max-width: 760px) { .bank { grid-template-columns: 1fr; } }
+
+  /* Standorte */
+  .places { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; }
+  .map { min-height: 460px; }
+  .place-list { display: flex; flex-direction: column; gap: 16px; }
+  .place { border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; background: #fff; }
+  .place.main { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .place .tag { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .place.main .tag { color: var(--yellow); }
+  .place h3 { margin: 6px 0 8px; }
+  .place p { margin: 0; font-size: 15.5px; }
+  .place.main p { color: #C9C5B6; }
+  .place a.route { display: inline-block; margin-top: 12px; font-weight: 700; font-size: 15px; }
+  .place.main a.route { color: var(--yellow); }
+  @media (max-width: 860px) { .places { grid-template-columns: 1fr; } .map { min-height: 280px; } }
+
+  /* Kontakt */
+  .contact { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); }
+  .channels { list-style: none; margin: 32px 0 0; padding: 0; }
+  .channels li { border-top: 1px solid var(--line); }
+  .channels li:last-child { border-bottom: 1px solid var(--line); }
+  .channels a, .channels div { display: grid; grid-template-columns: 110px 1fr auto; gap: 16px; align-items: center; padding: 20px 0; text-decoration: none; }
+  .channels small { color: var(--muted); font-size: 14px; }
+  .channels strong { font-size: clamp(20px, 2.2vw, 26px); font-weight: 700; letter-spacing: -0.01em; }
+  .channels a:hover strong { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  .channels .arrow { font-size: 22px; }
+  .channels strong { overflow-wrap: anywhere; }
+  form { display: grid; gap: 14px; background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: clamp(22px, 3vw, 36px); }
+  label { display: grid; gap: 6px; font-size: 14px; font-weight: 600; }
+  input, textarea, select {
+    width: 100%; min-width: 0; font: inherit; font-size: 16px; padding: 13px 14px; border: 1.5px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink);
+  }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 4px var(--yellow-soft); }
+  textarea { min-height: 140px; resize: vertical; }
+  .row2 { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 14px; }
+  form > *, .row2 > * { min-width: 0; }
+  .form-foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 13.5px; color: var(--muted); }
+  @media (max-width: 860px) { .contact { grid-template-columns: 1fr; } .channels a, .channels div { grid-template-columns: 1fr auto; } .channels small { grid-column: 1 / -1; } }
+  @media (max-width: 520px) { .row2 { grid-template-columns: 1fr; } }
+
+  /* Footer */
+  footer { background: var(--ink); color: #C9C5B6; padding: 64px 0 32px; font-size: 15px; }
+  .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; }
+  footer h4 { color: var(--paper); font-size: 13px; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 14px; }
+  footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--yellow); }
+  .foot-brand { display: flex; gap: 16px; align-items: flex-start; }
+  .foot-brand img { width: 64px; height: 64px; border-radius: 50%; }
+  .foot-brand p { margin: 0; max-width: 34ch; }
+  .foot-brand strong { color: var(--paper); display: block; font-size: 18px; margin-bottom: 4px; }
+  .foot-bottom { margin-top: 56px; padding-top: 24px; border-top: 1px solid #34322A; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 14px; }
+  @media (max-width: 860px) { .foot-grid { grid-template-columns: 1fr 1fr; } .foot-grid > :first-child { grid-column: 1 / -1; } }
+
+  .draft { background: var(--ink); color: var(--paper); font-size: 14px; text-align: center; padding: 9px var(--gutter); }
+  .draft strong { color: var(--yellow); }
+  .draft a { color: var(--paper); }
+
+  .map { position: relative; padding: 0; overflow: hidden; }
+  .map-consent { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 14px; padding: clamp(24px, 4vw, 48px); }
+  .map-consent h3 { font-size: 24px; }
+  .map-consent p { margin: 0; max-width: 42ch; color: var(--ink-2); font-size: 15.5px; }
+  .map-consent label { display: flex; gap: 8px; align-items: center; font-weight: 500; font-size: 14px; color: var(--ink-2); }
+  .map-consent input { width: auto; }
+  #map-canvas { position: absolute; inset: 0; display: none; }
+  .map.loaded #map-canvas { display: block; }
+  .map.loaded .map-consent { display: none; }
+  .pin { width: 34px; height: 34px; border-radius: 50%; background: var(--yellow); border: 3px solid var(--ink); display: grid; place-items: center; font-weight: 800; font-size: 14px; color: var(--ink); box-shadow: 0 2px 6px rgba(0,0,0,.25); }
+  .pin.main { width: 42px; height: 42px; background: var(--ink); color: var(--yellow); border-color: var(--yellow); }
+  .leaflet-popup-content { font-family: "Schibsted Grotesk", system-ui, sans-serif; font-size: 14px; }
+  .place[data-pin] { cursor: pointer; }
+
+  :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
+  #helfen :focus-visible, footer :focus-visible, .status :focus-visible { outline-color: var(--yellow); }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="draft"><strong>Entwurf</strong> für die neue Website – nicht die offizielle Seite. Aktuelle Infos auf <a href="https://www.neussertafel.de/">neussertafel.de</a></div>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Neusser Tafel – zur Startseite">
+      <img src="assets/logo.png" alt="">
+      <span>Neusser Tafel <small>e.V.</small></span>
+    </a>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a href="#zeiten">Öffnungszeiten</a>
+      <a href="#angebote">Angebote</a>
+      <a href="#ueber-uns">Über uns</a>
+      <a href="#helfen">Helfen</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a class="btn btn-ink" href="#spenden">Jetzt spenden</a>
+    <button class="menu-btn" aria-label="Menü öffnen" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Seit 1996 in Neuss</div>
+          <h1>Regional.<br><span class="mark">Sozial.</span></h1>
+          <p class="lead">Wir holen Lebensmittel, die sonst im Müll landen würden, bei Märkten, Bäckereien und Metzgereien ab – und geben sie an Menschen in Neuss und Korschenbroich weiter, die sie brauchen.</p>
+          <div class="hero-actions">
+            <a class="btn btn-yellow" href="#zeiten">Öffnungszeiten &amp; Anmeldung</a>
+            <a class="btn btn-line" href="#helfen">So können Sie helfen</a>
+          </div>
+        </div>
+
+        <aside class="status" aria-labelledby="status-title">
+          <div class="status-head">
+            <strong id="status-title">Heute geöffnet?</strong>
+            <span id="status-date">–</span>
+          </div>
+          <ul id="status-list"><!-- per JS --></ul>
+          <p class="status-foot">Dienstags und donnerstags ist die Hauptstelle meist nicht besetzt. Im Zweifel bitte vorher anrufen: <a href="tel:+4921318705">02131 8705</a></p>
+        </aside>
+      </div>
+
+      <div class="hero-media">
+        <div class="ph tall"><span>Foto: Ausgabe im Tafelladen, Düsseldorfer Str.</span></div>
+        <div class="ph yellow"><span>Foto: Fahrer:in mit Kühltransporter</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ZAHLEN -->
+  <div class="facts" aria-label="Die Tafel in Zahlen">
+    <div class="wrap">
+      <div class="fact"><b>~1.000</b><span>Haushalte versorgen wir jede Woche</span></div>
+      <div class="fact"><b>100 t</b><span>Lebensmittel retten und verteilen wir im Monat</span></div>
+      <div class="fact"><b>6.000 km</b><span>fahren unsere Fahrer:innen monatlich</span></div>
+      <div class="fact"><b>40+</b><span>Menschen arbeiten mit, fast alle ehrenamtlich</span></div>
+    </div>
+  </div>
+
+  <!-- ZWEI WEGE -->
+  <section id="wege" aria-labelledby="wege-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="wege-title">Wie können wir<br>weiterhelfen?</h2>
+        <p>Ob Sie Unterstützung brauchen oder selbst etwas beitragen möchten – hier finden Sie die nächsten Schritte.</p>
+      </div>
+      <div class="paths">
+        <article class="path need">
+          <h3>Ich brauche Unterstützung</h3>
+          <ol>
+            <li><span>Kommen Sie zur Anmeldung in die Hauptstelle: <strong>Mo, Mi und Fr, 14:30–16:00 Uhr</strong>.</span></li>
+            <li><span>Bringen Sie Ihren aktuellen, vollständigen Bescheid und Ihren Ausweis mit.</span></li>
+            <li><span>Nach der Anmeldung können Sie in der Regel ein halbes Jahr bei uns einkaufen.</span></li>
+          </ol>
+          <a class="btn btn-yellow" href="#zeiten">Alle Zeiten &amp; Orte ansehen</a>
+        </article>
+        <article class="path give">
+          <h3>Ich möchte helfen</h3>
+          <ol>
+            <li><span>Mit einer Geldspende – jeder Euro fließt direkt in die Arbeit vor Ort.</span></li>
+            <li><span>Mit Lebensmitteln oder gut erhaltener Kleidung für den Secondhandladen.</span></li>
+            <li><span>Mit Ihrer Zeit: als Fahrer:in, im Laden oder im Bundesfreiwilligendienst.</span></li>
+          </ol>
+          <a class="btn btn-ink" href="#helfen">Möglichkeiten ansehen</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÖFFNUNGSZEITEN -->
+  <section id="zeiten" aria-labelledby="zeiten-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="zeiten-title">Wann und wo.</h2>
+        <p>Die Hauptstelle in Neuss – „Alles unter einem Dach“ – mit Tafelladen, Secondhandladen und Büro. Dazu zwei Ausgabestellen.</p>
+      </div>
+
+      <div class="table-scroll">
+        <table class="week" id="week">
+          <thead>
+            <tr>
+              <th scope="col"><span class="sr-only">Angebot</span></th>
+              <th scope="col" data-day="1">Mo</th>
+              <th scope="col" data-day="2">Di</th>
+              <th scope="col" data-day="3">Mi</th>
+              <th scope="col" data-day="4">Do</th>
+              <th scope="col" data-day="5">Fr</th>
+            </tr>
+          </thead>
+          <tbody><!-- per JS aus den Daten unten --></tbody>
+        </table>
+      </div>
+      <ul class="days" id="days"><!-- Mobilansicht, per JS --></ul>
+
+      <div class="notes">
+        <div class="note warn">
+          <h3>Neu anmelden</h3>
+          <p>Mo, Mi und Fr von 14:30 bis 16:00 Uhr in der Hauptstelle. Bitte den aktuellen, kompletten Bescheid und einen amtlichen Ausweis mitbringen.</p>
+        </div>
+        <div class="note">
+          <h3>Ab 16:00 Uhr</h3>
+          <p>werden im Tafelladen ausschließlich Kund:innen mit weißem Punkt versorgt.</p>
+        </div>
+        <div class="note">
+          <h3>Tafeltaxi</h3>
+          <p>Freitags liefern wir Lebensmittel nach Hause – bei 70 % Schwerbehinderung und eingeschränkter Mobilität, mit Nachweis. Anmeldung zu den Bürozeiten.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANGEBOTE -->
+  <section id="angebote" aria-labelledby="angebote-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="angebote-title">Was wir leisten.</h2>
+        <p>Wir fragen nicht nach den Gründen der Bedürftigkeit. Unsere Hilfe ergänzt staatliche Unterstützung und soll Luft verschaffen, um wieder auf eigenen Beinen zu stehen.</p>
+      </div>
+      <div class="offers">
+        <article class="offer wide">
+          <div class="ph"><span>Foto: Obst- und Gemüseauslage</span></div>
+          <h3>Tafelladen</h3>
+          <p>Anerkannt bedürftige Menschen erhalten bei uns eine Vielzahl frischer Lebensmittel – kostenlos oder gegen einen kleinen Beitrag.</p>
+          <p class="meta">Mo, Mi, Fr · 14:30–16:30 <span>· Hauptstelle</span></p>
+        </article>
+        <article class="offer wide">
+          <div class="ph"><span>Foto: Kleiderständer im Secondhandladen</span></div>
+          <h3>Secondhandladen &amp; Kleiderkammer</h3>
+          <p>Gut erhaltene Kleidung, Bücher und kleine Haushaltsartikel – offen für alle Bürger:innen.</p>
+          <p class="meta">Mo, Mi, Fr · 13:00–16:00 <span>· Hauptstelle</span></p>
+        </article>
+        <article class="offer">
+          <h3>Tafeltaxi</h3>
+          <p>Lieferung nach Hause für Menschen, die nicht selbst kommen können.</p>
+          <p class="meta">Freitags · 14:00–16:30</p>
+        </article>
+        <article class="offer">
+          <h3>Touren zu Einrichtungen</h3>
+          <p>An mindestens zwei Tagen pro Woche beliefern wir Kitas, offene Ganztagsschulen, Jugendeinrichtungen, Obdachlosentreffs und Flüchtlingsunterkünfte.</p>
+        </article>
+        <article class="offer">
+          <h3>Hin- und Herberge</h3>
+          <p>Freitags versorgen wir Menschen ohne festen Wohnsitz mit Lebensmitteln und, wenn gewünscht, mit warmer Kleidung.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÜBER UNS -->
+  <section id="ueber-uns" aria-labelledby="ueber-title" style="background: var(--paper-2)">
+    <div class="wrap">
+      <div class="about">
+        <div class="ph"><span>Foto: Team der Neusser Tafel</span></div>
+        <div class="about-body">
+          <div class="eyebrow">Über uns</div>
+          <h2 id="ueber-title">Neusser für Neusser.</h2>
+          <p class="big">Bürger:innen und Unternehmen aus Neuss spenden Lebensmittel, Geld und Zeit. Wir sorgen dafür, dass all das <em>direkt bei den Menschen ankommt</em>, die es hier vor Ort brauchen.</p>
+          <p>Unsere Aufgabe ist die Logistik zwischen Überfluss und Mangel. Unsere Fahrer:innen holen an fünf Tagen pro Woche Lebensmittel bei Märkten und Produzenten ab und verteilen sie sofort weiter. Im Büro wird der gesamte Ablauf organisiert, dreimal pro Woche öffnet unser Laden.</p>
+          <p>Damit wir laufend neuen Menschen helfen können, ist unsere Unterstützung in der Regel auf ein halbes Jahr angelegt – als Anschubhilfe, nicht als Dauerlösung.</p>
+          <ul class="timeline">
+            <li><b>26.02.1996</b><span>Gründung als gemeinnütziger, mildtätiger Verein – eine der ersten 25 Tafeln in Deutschland.</span></li>
+            <li><b>Mitglied</b><span>im Dachverband Tafel Deutschland e.V., gemeinsam mit über 970 Tafeln bundesweit.</span></li>
+            <li><b>Heute</b><span>rund 1.000 Haushalte pro Woche in Neuss und Korschenbroich, getragen von über 40 Mitarbeitenden.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HELFEN -->
+  <section id="helfen" aria-labelledby="helfen-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="helfen-title">Sie helfen,<br>indem Sie geben.</h2>
+        <p>Unsere Arbeit wird ausschließlich durch Spenden von Unternehmen und Mitbürger:innen getragen. Wir können nur weitergeben, was bei uns ankommt.</p>
+      </div>
+      <div class="ways">
+        <div class="way">
+          <span class="num">01</span>
+          <h3>Geld</h3>
+          <p>Hält Fahrzeuge, Laden und Büro am Laufen – damit gerettete Lebensmittel ankommen.</p>
+          <a href="#spenden">Zum Spendenkonto →</a>
+        </div>
+        <div class="way">
+          <span class="num">02</span>
+          <h3>Lebensmittel</h3>
+          <p>Für Handel, Bäckereien, Erzeuger und Gastronomie: Wir holen Überschüsse bei Ihnen ab.</p>
+          <a href="#kontakt">Abholung anfragen →</a>
+        </div>
+        <div class="way">
+          <span class="num">03</span>
+          <h3>Sachspenden</h3>
+          <p>Gut erhaltene Kleidung, Bücher und Haushaltsartikel nimmt unser Secondhandladen gern entgegen.</p>
+          <a href="#zeiten">Annahmezeiten →</a>
+        </div>
+        <div class="way">
+          <span class="num">04</span>
+          <h3>Zeit</h3>
+          <p>Ob Fahrdienst, Sortieren, Ladenverkauf oder Büro – auch im Bundesfreiwilligendienst oder als Praktikum.</p>
+          <a href="#kontakt">Mitmachen →</a>
+        </div>
+      </div>
+
+      <div class="bank" id="spenden">
+        <div>
+          <div class="eyebrow" style="margin-bottom:8px">Spendenkonto</div>
+          <div class="iban" id="iban">DE39 3055 0000 0044 0406 40</div>
+          <dl>
+            <dt>Empfänger</dt><dd>Neusser Tafel e.V.</dd>
+            <dt>Bank</dt><dd>Sparkasse Neuss</dd>
+            <dt>BIC</dt><dd>WELADEDNXXX</dd>
+          </dl>
+          <small>Die Neusser Tafel ist als gemeinnützig und mildtätig anerkannt.</small>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px">
+          <button class="btn btn-ink" id="copy-iban" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            <span>IBAN kopieren</span>
+          </button>
+          <a class="btn btn-line" href="https://www.neussertafel.de/wie-sie-helfen-ausfuehrlich/spendenformular/" target="_blank" rel="noopener">Spendenformular</a>
+          <a class="btn btn-line" href="https://www.neussertafel.de/app/download/11567868625/Patenschafts-Antrag.pdf?t=1432649874" target="_blank" rel="noopener">Patenschafts-Antrag (PDF)</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STANDORTE -->
+  <section id="standorte" aria-labelledby="standorte-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="standorte-title">So finden<br>Sie uns.</h2>
+        <p>Die Hauptstelle erreichen Sie mit der Straßenbahn U75 oder dem Bus 830.</p>
+      </div>
+      <div class="places">
+        <div class="ph map" id="map">
+          <div class="map-consent">
+            <h3>Karte anzeigen</h3>
+            <p>Die Karte wird von OpenStreetMap geladen. Dabei wird Ihre IP-Adresse an die OpenStreetMap Foundation übertragen.</p>
+            <button class="btn btn-ink" type="button" id="map-load">Karte laden</button>
+            <label><input type="checkbox" id="map-remember"> Für diesen Browser merken</label>
+          </div>
+          <div id="map-canvas" role="region" aria-label="Karte mit den Standorten der Neusser Tafel"></div>
+        </div>
+        <div class="place-list">
+          <div class="place main" data-pin="0">
+            <span class="tag">1 · Hauptstelle</span>
+            <h3>Düsseldorfer Str. 50, 41460 Neuss</h3>
+            <p>Tafelladen, Secondhandladen, Büro</p>
+            <a class="route" href="https://www.openstreetmap.org/?mlat=51.21340&mlon=6.69217#map=17/51.21340/6.69217" target="_blank" rel="noopener">Route planen ↗</a>
+          </div>
+          <div class="place" data-pin="1">
+            <span class="tag">2 · Außenstelle · Di</span>
+            <h3>Am Hallenbad 66, 41352 Korschenbroich-Kleinenbroich</h3>
+            <p>Ausgabe dienstags, 14:30–16:00 Uhr</p>
+            <a class="route" href="https://www.openstreetmap.org/?mlat=51.20399&mlon=6.55463#map=17/51.20399/6.55463" target="_blank" rel="noopener">Route planen ↗</a>
+          </div>
+          <div class="place" data-pin="2">
+            <span class="tag">3 · Ausgabestelle · Do</span>
+            <h3>Am Goldberg 112, 41469 Neuss-Derikum</h3>
+            <p>Vianney Gesellschaft e.V., Schwester Rosemarie · donnerstags, 15:00–17:00 Uhr</p>
+            <a class="route" href="https://www.openstreetmap.org/?mlat=51.16061&mlon=6.74251#map=17/51.16061/6.74251" target="_blank" rel="noopener">Route planen ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
+  <section id="kontakt" aria-labelledby="kontakt-title" style="padding-top: 0">
+    <div class="wrap">
+      <div class="contact">
+        <div>
+          <div class="eyebrow">Kontakt</div>
+          <h2 id="kontakt-title">Fragen?<br>Rufen Sie an.</h2>
+          <p class="lead" style="margin-top:24px">Das Büro ist Montag bis Freitag von 9:00 bis 13:00 Uhr telefonisch erreichbar. Persönliche Termine bitte nur nach Vereinbarung.</p>
+          <ul class="channels">
+            <li><a href="tel:+4921318705"><small>Telefon</small><strong>02131 8705</strong><span class="arrow">→</span></a></li>
+            <li><a href="mailto:neussertafel@yahoo.de"><small>E-Mail</small><strong>neussertafel@yahoo.de</strong><span class="arrow">→</span></a></li>
+            <li><div><small>Fax</small><strong>02131 5215247</strong><span></span></div></li>
+          </ul>
+        </div>
+        <form id="contact-form">
+          <h3 style="font-size:24px; margin-bottom:4px">Nachricht schreiben</h3>
+          <div class="row2">
+            <label>Name *<input name="name" required autocomplete="name"></label>
+            <label>E-Mail *<input name="email" type="email" required autocomplete="email"></label>
+          </div>
+          <label>Worum geht es?
+            <select name="topic">
+              <option>Allgemeine Frage</option>
+              <option>Lebensmittelspende / Abholung</option>
+              <option>Ehrenamt / Bundesfreiwilligendienst</option>
+              <option>Geldspende / Zuwendungsbestätigung</option>
+              <option>Presse</option>
+            </select>
+          </label>
+          <label>Nachricht *<textarea name="message" required></textarea></label>
+          <div class="form-foot">
+            <span>Öffnet Ihr E-Mail-Programm mit der fertigen Nachricht.</span>
+            <button class="btn btn-ink" type="submit">E-Mail erstellen</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/logo.png" alt="Logo der Neusser Tafel">
+        <p><strong>Neusser Tafel e.V.</strong>Düsseldorfer Str. 50<br>41460 Neuss<br>Mitglied im Dachverband Tafel Deutschland e.V.</p>
+      </div>
+      <div>
+        <h4>Hilfe</h4>
+        <ul><li><a href="#zeiten">Öffnungszeiten</a></li><li><a href="#wege">Anmeldung</a></li><li><a href="#standorte">Standorte</a></li></ul>
+      </div>
+      <div>
+        <h4>Mitmachen</h4>
+        <ul><li><a href="#spenden">Spenden</a></li><li><a href="#helfen">Ehrenamt</a></li><li><a href="#kontakt">Kontakt</a></li></ul>
+      </div>
+      <div>
+        <h4>Rechtliches</h4>
+        <ul><li><a href="https://www.neussertafel.de/about/">Impressum</a></li><li><a href="https://www.neussertafel.de/j/privacy">Datenschutz</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year">2026</span> Neusser Tafel e.V.</span>
+      <span>Regional sozial.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---------- Öffnungszeiten: eine Datenquelle für Wochentabelle + "Heute"-Box ----------
+  // Tage: 1 = Montag … 5 = Freitag
+  const SCHEDULE = [
+    { name: "Tafelladen",        where: "Hauptstelle Neuss",     slots: { 1: ["14:30","16:30"], 3: ["14:30","16:30"], 5: ["14:30","16:30"] } },
+    { name: "Neuanmeldung",      where: "Hauptstelle Neuss",     slots: { 1: ["14:30","16:00"], 3: ["14:30","16:00"], 5: ["14:30","16:00"] } },
+    { name: "Secondhandladen",   where: "Hauptstelle Neuss",     slots: { 1: ["13:00","16:00"], 3: ["13:00","16:00"], 5: ["13:00","16:00"] } },
+    { name: "Tafeltaxi",         where: "Lieferung nach Hause",  slots: { 5: ["14:00","16:30"] } },
+    { name: "Ausgabe Kleinenbroich", where: "Am Hallenbad 66",   slots: { 2: ["14:30","16:00"] } },
+    { name: "Ausgabe Derikum",   where: "Am Goldberg 112",       slots: { 4: ["15:00","17:00"] } },
+    { name: "Büro (telefonisch)", where: "02131 8705",           slots: { 1: ["09:00","13:00"], 2: ["09:00","13:00"], 3: ["09:00","13:00"], 4: ["09:00","13:00"], 5: ["09:00","13:00"] } },
+  ];
+  const DAYNAMES = ["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
+
+  // aktuelle Zeit in Deutschland, unabhängig von der Zeitzone des Geräts
+  function berlinNow() {
+    const p = Object.fromEntries(new Intl.DateTimeFormat("de-DE", {
+      timeZone: "Europe/Berlin", weekday: "short", hour: "2-digit", minute: "2-digit", hour12: false,
+      day: "numeric", month: "long"
+    }).formatToParts(new Date()).map(x => [x.type, x.value]));
+    const map = { "So.":0, "Mo.":1, "Di.":2, "Mi.":3, "Do.":4, "Fr.":5, "Sa.":6 };
+    return { day: map[p.weekday], minutes: (+p.hour % 24) * 60 + +p.minute, label: `${p.day}. ${p.month}` };
+  }
+  const toMin = t => { const [h, m] = t.split(":").map(Number); return h * 60 + m; };
+  const fmt = t => t.replace(/^0/, "");
+
+  function render() {
+    const now = berlinNow();
+
+    // Wochentabelle
+    const tbody = document.querySelector("#week tbody");
+    tbody.innerHTML = SCHEDULE.map(s => `
+      <tr>
+        <th scope="row">${s.name}<small>${s.where}</small></th>
+        ${[1,2,3,4,5].map(d => {
+          const sl = s.slots[d];
+          return `<td class="${sl ? "on" : ""} ${d === now.day ? "col-today" : ""}">${sl ? `<span>${fmt(sl[0])}–${sl[1]}</span>` : "–"}</td>`;
+        }).join("")}
+      </tr>`).join("");
+    document.querySelectorAll("#week thead th[data-day]").forEach(th => th.classList.toggle("today", +th.dataset.day === now.day));
+
+    // Mobil: Liste nach Wochentagen, heute zuerst
+    const order = [1,2,3,4,5].sort((a, b) => (a === now.day ? -1 : b === now.day ? 1 : 0));
+    document.getElementById("days").innerHTML = order.map(d => `
+      <li class="day ${d === now.day ? "today" : ""}">
+        <h3>${DAYNAMES[d]}${d === now.day ? " <em>heute</em>" : ""}</h3>
+        <dl>${SCHEDULE.filter(s => s.slots[d]).map(s => `<div><dt>${s.name}<small>${s.where}</small></dt><dd>${fmt(s.slots[d][0])}–${s.slots[d][1]}</dd></div>`).join("")}</dl>
+      </li>`).join("");
+
+    // Heute-Box
+    document.getElementById("status-date").textContent = `${DAYNAMES[now.day]}, ${now.label}`;
+    const list = document.getElementById("status-list");
+    const items = SCHEDULE.filter(s => s.name !== "Neuanmeldung").map(s => {
+      const sl = s.slots[now.day];
+      let state;
+      if (!sl) {
+        const next = [1,2,3,4,5,6,7].map(o => (now.day + o) % 7).find(d => s.slots[d]);
+        state = `<span class="pill">Geschlossen<small>wieder ${DAYNAMES[next]}</small></span>`;
+      } else if (now.minutes < toMin(sl[0])) {
+        state = `<span class="pill is-later">ab ${fmt(sl[0])} Uhr</span>`;
+      } else if (now.minutes < toMin(sl[1])) {
+        state = `<span class="pill is-open">Geöffnet<small>bis ${sl[1]} Uhr</small></span>`;
+      } else {
+        state = `<span class="pill">Heute beendet</span>`;
+      }
+      return { s, open: !!sl, html: `<li><span class="name">${s.name}</span><span class="where">${s.where}</span><span class="state">${state}</span></li>` };
+    });
+    // was heute stattfindet, zuerst
+    items.sort((a, b) => b.open - a.open);
+    list.innerHTML = items.slice(0, 4).map(i => i.html).join("");
+  }
+  render();
+  setInterval(render, 60_000);
+
+  // IBAN kopieren
+  document.getElementById("copy-iban").addEventListener("click", async e => {
+    const label = e.currentTarget.querySelector("span");
+    try {
+      await navigator.clipboard.writeText(document.getElementById("iban").textContent.replace(/\s/g, ""));
+      label.textContent = "Kopiert";
+    } catch { label.textContent = "Bitte manuell kopieren"; }
+    setTimeout(() => label.textContent = "IBAN kopieren", 2200);
+  });
+
+  // Mobile-Menü
+  const header = document.getElementById("top"), mb = header.querySelector(".menu-btn");
+  mb.addEventListener("click", () => { const o = header.classList.toggle("open"); mb.setAttribute("aria-expanded", o); });
+  header.querySelectorAll(".nav a").forEach(a => a.addEventListener("click", () => { header.classList.remove("open"); mb.setAttribute("aria-expanded", false); }));
+
+  // Kontaktformular: ohne Server, erzeugt eine E-Mail
+  document.getElementById("contact-form").addEventListener("submit", e => {
+    e.preventDefault();
+    const f = new FormData(e.target);
+    const subject = `[Website] ${f.get("topic")}`;
+    const body = `${f.get("message")}\n\n—\n${f.get("name")}\n${f.get("email")}`;
+    location.href = `mailto:neussertafel@yahoo.de?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+
+  // Karte: OpenStreetMap erst nach Zustimmung laden
+  const PLACES = [
+    { name: "Hauptstelle", addr: "Düsseldorfer Str. 50, 41460 Neuss", ll: [51.21340, 6.69217], main: true },
+    { name: "Außenstelle Kleinenbroich", addr: "Am Hallenbad 66, 41352 Korschenbroich", ll: [51.20399, 6.55463] },
+    { name: "Ausgabestelle Derikum", addr: "Am Goldberg 112, 41469 Neuss", ll: [51.16061, 6.74251] },
+  ];
+  const mapEl = document.getElementById("map");
+  let map, markers = [];
+  function loadCss(href) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = href; document.head.append(l); }
+  function loadMap() {
+    if (map) return;
+    loadCss("https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css");
+    const sc = document.createElement("script");
+    sc.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
+    sc.onload = () => {
+      mapEl.classList.add("loaded");
+      map = L.map("map-canvas", { scrollWheelZoom: false });
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(map);
+      markers = PLACES.map((p, i) => L.marker(p.ll, {
+        icon: L.divIcon({ className: "", html: `<div class="pin ${p.main ? "main" : ""}">${i + 1}</div>`, iconSize: p.main ? [42, 42] : [34, 34] })
+      }).addTo(map).bindPopup(`<strong>${p.name}</strong><br>${p.addr}`));
+      map.fitBounds(PLACES.map(p => p.ll), { padding: [40, 40] });
+    };
+    document.head.append(sc);
+  }
+  document.getElementById("map-load").addEventListener("click", () => {
+    if (document.getElementById("map-remember").checked) { try { localStorage.setItem("map-ok", "1"); } catch {} }
+    loadMap();
+  });
+  try { if (localStorage.getItem("map-ok") === "1") loadMap(); } catch {}
+  document.querySelectorAll(".place[data-pin]").forEach(el => el.addEventListener("click", e => {
+    if (!map || e.target.closest("a")) return;
+    const i = +el.dataset.pin; map.setView(PLACES[i].ll, 16); markers[i].openPopup();
+  }));
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
