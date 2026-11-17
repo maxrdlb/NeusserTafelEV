@@ -74,8 +74,8 @@
         <p>Die Verbindung zu dieser Website ist per HTTPS verschlüsselt.</p>
 
         <h2 id="karte">Karte</h2>
-        <p>Auf der Startseite können Sie eine Karte unserer Standorte einblenden. Erst wenn Sie auf „Karte laden“ klicken, werden Kartendaten von der OpenStreetMap Foundation (St John’s Innovation Centre, Cowley Road, Cambridge, CB4 0WS, Vereinigtes Königreich) sowie die Kartensoftware Leaflet über das Content-Delivery-Netzwerk cdnjs der Cloudflare, Inc. (101 Townsend St, San Francisco, CA 94107, USA) geladen. Dabei werden Ihre IP-Adresse und Browserangaben an diese Anbieter übertragen.</p>
-        <p>Rechtsgrundlage ist Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG). Für das Vereinigte Königreich besteht ein Angemessenheitsbeschluss der EU-Kommission; Cloudflare ist unter dem EU-US Data Privacy Framework zertifiziert. Mehr bei <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener">OpenStreetMap</a> und <a href="https://www.cloudflare.com/de-de/privacypolicy/" target="_blank" rel="noopener">Cloudflare</a>.</p>
+        <p>Auf der Startseite können Sie eine Karte unserer Standorte einblenden. Erst wenn Sie auf „Karte laden“ klicken, werden Kartendaten von der OpenStreetMap Foundation (St John’s Innovation Centre, Cowley Road, Cambridge, CB4 0WS, Vereinigtes Königreich) geladen. Dabei werden Ihre IP-Adresse und Browserangaben an die OpenStreetMap Foundation übertragen. Die Kartensoftware Leaflet liegt auf unserem eigenen Server; dafür werden keine Daten an Dritte übertragen.</p>
+        <p>Rechtsgrundlage ist Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG). Für das Vereinigte Königreich besteht ein Angemessenheitsbeschluss der EU-Kommission. Mehr in der <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener">Datenschutzerklärung von OpenStreetMap</a>.</p>
 
         <h2 id="speicher">Speicherung im Browser</h2>
         <p>Wenn Sie beim Laden der Karte „Für diesen Browser merken“ ankreuzen, speichern wir diese Entscheidung im lokalen Speicher Ihres Browsers (Local Storage). Die Angabe verlässt Ihr Gerät nicht. Sie können die Einwilligung jederzeit widerrufen:</p>
@@ -132,12 +132,6 @@
 </footer>
 
 <script src="assets/nav.js"></script>
-<script>
-  document.getElementById("reset-map").addEventListener("click", () => {
-    let msg = "Zurückgesetzt. Die Karte lädt erst wieder nach Ihrem Klick.";
-    try { localStorage.removeItem("map-ok"); } catch { msg = "Es war nichts gespeichert."; }
-    document.getElementById("reset-msg").textContent = msg;
-  });
-</script>
+<script src="assets/privacy.js"></script>
 </body>
 </html>
