@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spendenformular – Neusser Tafel e.V.</title>
+<meta name="description" content="Spenden per Lastschrift an die Neusser Tafel e.V. – Formular zum Ausdrucken.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div class="draft"><strong>Entwurf</strong> für die neue Website – nicht die offizielle Seite. Aktuelle Infos auf <a href="https://www.neussertafel.de/">neussertafel.de</a></div>
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Neusser Tafel – zur Startseite">
+      <img src="assets/logo.png" alt="">
+      <span>Neusser Tafel <small>e.V.</small></span>
+    </a>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a href="index.html#zeiten">Öffnungszeiten</a>
+      <a href="index.html#angebote">Angebote</a>
+      <a href="index.html#ueber-uns">Über uns</a>
+      <a href="index.html#helfen">Helfen</a>
+      <a href="index.html#kontakt">Kontakt</a>
+    </nav>
+    <a class="btn btn-ink" href="index.html#spenden">Jetzt spenden</a>
+    <button class="menu-btn" aria-label="Menü öffnen" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+  <div class="page-hero">
+    <div class="wrap">
+      <a class="crumb" href="index.html#helfen">← Wie Sie helfen</a>
+      <h1>Spenden&shy;formular</h1>
+      <p class="lead">Spenden Sie einmalig per Lastschrift: Formular hier ausfüllen, ausdrucken, unterschreiben und bei uns abgeben oder per Post schicken.</p>
+    </div>
+  </div>
+  <div class="page">
+    <div class="wrap donate-grid">
+      <form class="mandate" id="mandate" novalidate>
+        <div class="callout no-print"><p>Ihre Eingaben bleiben in Ihrem Browser. Wir übertragen keine Bankdaten über diese Website, Sie erhalten nur einen fertigen Ausdruck.</p></div>
+
+        <div class="print-only">
+          <p><strong>Neusser Tafel e.V.</strong> · Düsseldorfer Str. 50 · 41460 Neuss</p>
+        </div>
+
+        <fieldset>
+          <legend>Spendenbetrag</legend>
+          <div class="amounts" role="radiogroup" aria-label="Betrag wählen">
+            <label><input type="radio" name="preset" value="20"><span>20 €</span></label>
+            <label><input type="radio" name="preset" value="50" checked><span>50 €</span></label>
+            <label><input type="radio" name="preset" value="100"><span>100 €</span></label>
+            <label><input type="radio" name="preset" value="250"><span>250 €</span></label>
+          </div>
+          <label>Betrag in Euro *<input name="amount" id="amount" inputmode="decimal" value="50" autocomplete="off"></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Persönliche Angaben</legend>
+          <label>Anrede
+            <select name="salutation"><option>Keine Angabe</option><option>Frau</option><option>Herr</option><option>Firma</option></select>
+          </label>
+          <div class="row2">
+            <label>Vorname<input name="first" autocomplete="given-name"></label>
+            <label>Nachname / Firma *<input name="last" autocomplete="family-name"></label>
+          </div>
+          <label>Straße und Hausnummer *<input name="street" autocomplete="street-address"></label>
+          <div class="row2">
+            <label>PLZ und Ort *<input name="city" autocomplete="address-level2"></label>
+            <label>Telefon<input name="phone" type="tel" autocomplete="tel"></label>
+          </div>
+          <label>E-Mail<input name="email" type="email" autocomplete="email"></label>
+          <label class="check"><input type="checkbox" name="receipt"> Ich möchte eine Zuwendungsbestätigung (Spendenquittung).</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Bankverbindung</legend>
+          <label>Kontoinhaber:in *<input name="holder" autocomplete="off"></label>
+          <label>IBAN *<input name="iban" id="iban-in" autocomplete="off" spellcheck="false" placeholder="DE00 0000 0000 0000 0000 00"></label>
+          <span id="iban-msg" role="status" style="font-size:14px; margin-top:-6px"></span>
+          <div class="row2">
+            <label>Kreditinstitut<input name="bank" autocomplete="off"></label>
+            <label>BIC<input name="bic" autocomplete="off"></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>SEPA-Lastschriftmandat</legend>
+          <div class="mandate-text">
+            <p>Ich ermächtige die Neusser Tafel e.V., den oben genannten Spendenbetrag einmalig von meinem Konto mittels Lastschrift einzuziehen. Zugleich weise ich mein Kreditinstitut an, die von der Neusser Tafel e.V. auf mein Konto gezogene Lastschrift einzulösen.</p>
+            <p>Hinweis: Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten Betrages verlangen. Es gelten dabei die mit meinem Kreditinstitut vereinbarten Bedingungen.</p>
+            <p>Gläubiger-Identifikationsnummer: <strong>[bitte ergänzen]</strong> · Die Mandatsreferenz wird separat mitgeteilt.</p>
+          </div>
+          <label class="check"><input type="checkbox" name="agree"> Ich habe die Bedingungen gelesen und bin einverstanden. *</label>
+        </fieldset>
+
+        <label>Nachricht (optional)<textarea name="note" style="min-height:90px"></textarea></label>
+
+        <div class="sign">
+          <div>Ort, Datum</div>
+          <div>Unterschrift Kontoinhaber:in</div>
+        </div>
+
+        <div class="form-foot">
+          <span id="form-msg" role="status">* Pflichtfelder für die Lastschrift</span>
+          <span style="display:flex; gap:10px; flex-wrap:wrap">
+            <button class="btn btn-line" type="button" id="print-empty">Leer drucken</button>
+            <button class="btn btn-ink" type="submit">Ausfüllen &amp; drucken</button>
+          </span>
+        </div>
+      </form>
+
+      <aside class="donate-side">
+        <div class="bank">
+          <div>
+            <div class="eyebrow" style="margin-bottom:8px">Lieber überweisen?</div>
+            <div class="iban">DE39 3055 0000 0044 0406 40</div>
+            <dl>
+              <dt>Empfänger</dt><dd>Neusser Tafel e.V.</dd>
+              <dt>Bank</dt><dd>Sparkasse Neuss</dd>
+              <dt>BIC</dt><dd>WELADEDNXXX</dd>
+            </dl>
+          </div>
+        </div>
+        <div class="side-card">
+          <h3>Spendenquittung</h3>
+          <p>Für eine Zuwendungsbestätigung brauchen wir Ihren Namen und Ihre Anschrift. Bei Spenden bis 300 € genügt dem Finanzamt in der Regel der Kontoauszug.</p>
+        </div>
+        <div class="side-card">
+          <h3>Dauerhaft helfen</h3>
+          <p>Als Pate oder Patin unterstützen Sie uns regelmäßig und geben uns Planungssicherheit für Miete, Kraftstoff und Reparaturen.</p>
+          <a href="https://www.neussertafel.de/app/download/11567868625/Patenschafts-Antrag.pdf?t=1432649874" target="_blank" rel="noopener" style="font-weight:700">Patenschafts-Antrag (PDF) →</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/logo.png" alt="Logo der Neusser Tafel">
+        <p><strong>Neusser Tafel e.V.</strong>Düsseldorfer Str. 50<br>41460 Neuss<br>Mitglied im Dachverband Tafel Deutschland e.V.</p>
+      </div>
+      <div>
+        <h4>Hilfe</h4>
+        <ul><li><a href="index.html#zeiten">Öffnungszeiten</a></li><li><a href="index.html#wege">Anmeldung</a></li><li><a href="index.html#standorte">Standorte</a></li></ul>
+      </div>
+      <div>
+        <h4>Mitmachen</h4>
+        <ul><li><a href="index.html#spenden">Spenden</a></li><li><a href="index.html#helfen">Ehrenamt</a></li><li><a href="index.html#kontakt">Kontakt</a></li></ul>
+      </div>
+      <div>
+        <h4>Rechtliches</h4>
+        <ul><li><a href="impressum.html">Impressum</a></li><li><a href="datenschutz.html">Datenschutz</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year">2026</span> Neusser Tafel e.V.</span>
+      <span>Regional sozial.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/nav.js"></script>
+<script>
+  const form = document.getElementById("mandate");
+  const amount = document.getElementById("amount");
+
+  // Betrags-Chips und Freitextfeld synchron halten
+  form.querySelectorAll('input[name="preset"]').forEach(r => r.addEventListener("change", () => { amount.value = r.value; }));
+  amount.addEventListener("input", () => {
+    form.querySelectorAll('input[name="preset"]').forEach(r => { r.checked = r.value === amount.value.trim(); });
+  });
+
+  // IBAN: gruppiert anzeigen und Prüfsumme (ISO 13616, mod 97) checken
+  const ibanIn = document.getElementById("iban-in"), ibanMsg = document.getElementById("iban-msg");
+  function ibanValid(raw) {
+    const s = raw.replace(/\s+/g, "").toUpperCase();
+    if (!/^[A-Z]{2}\d{2}[A-Z0-9]{10,30}$/.test(s)) return false;
+    if (s.startsWith("DE") && s.length !== 22) return false;
+    const re = (s.slice(4) + s.slice(0, 4)).replace(/[A-Z]/g, c => c.charCodeAt(0) - 55);
+    let rest = 0;
+    for (const ch of re) rest = (rest * 10 + +ch) % 97;
+    return rest === 1;
+  }
+  ibanIn.addEventListener("input", () => {
+    const pos = ibanIn.selectionStart, before = ibanIn.value.length;
+    ibanIn.value = ibanIn.value.replace(/\s+/g, "").toUpperCase().replace(/(.{4})/g, "$1 ").trim();
+    ibanIn.setSelectionRange(pos + ibanIn.value.length - before, pos + ibanIn.value.length - before);
+    ibanMsg.textContent = "";
+  });
+  ibanIn.addEventListener("blur", () => {
+    if (!ibanIn.value) return;
+    ibanMsg.textContent = ibanValid(ibanIn.value) ? "✓ IBAN sieht gültig aus" : "Diese IBAN scheint nicht zu stimmen. Bitte prüfen.";
+    ibanMsg.style.color = ibanValid(ibanIn.value) ? "var(--open)" : "#B42318";
+  });
+
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const need = ["amount", "last", "street", "city", "holder", "iban"].filter(n => !form.elements[n].value.trim());
+    if (!form.elements.agree.checked) need.push("agree");
+    const msg = document.getElementById("form-msg");
+    if (need.length) {
+      msg.textContent = "Bitte alle Pflichtfelder ausfüllen und dem Mandat zustimmen.";
+      msg.style.color = "#B42318";
+      form.elements[need[0]].focus();
+      return;
+    }
+    if (!ibanValid(ibanIn.value)) { ibanIn.focus(); ibanIn.dispatchEvent(new Event("blur")); return; }
+    msg.textContent = "* Pflichtfelder für die Lastschrift"; msg.style.color = "";
+    window.print();
+  });
+
+  document.getElementById("print-empty").addEventListener("click", () => {
+    form.reset(); amount.value = ""; form.querySelectorAll('input[name="preset"]').forEach(r => r.checked = false);
+    ibanMsg.textContent = ""; window.print();
+  });
+</script>
+</body>
+</html>
